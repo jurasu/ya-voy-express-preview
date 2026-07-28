@@ -1,33 +1,520 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ya Voy Express</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    html, body {
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-    }
-    iframe {
-      width: 100%;
-      height: 100%;
-      border: none;
-      display: block;
-    }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Ya Voy Express - Entregas que no se detienen</title>
+<meta name="description" content="Courier, fulfillment y pick & pack diseñados para el ritmo de tu negocio. Conectamos Lima con cada rincón del Perú." />
+<link rel="icon" href="assets/logo-icon-dark.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          'brand-navy': '#152B54',
+          'brand-orange': '#E8721C',
+          'brand-soft': '#FAFAFB',
+          border: '#E7E7EC',
+          background: '#FFFFFF',
+          foreground: '#152B54',
+          muted: { DEFAULT: '#F7F7F9', foreground: '#6B7280' },
+        },
+        fontFamily: {
+          sans: ['Outfit', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        },
+        boxShadow: {
+          card: '0 10px 40px -12px rgb(21 43 84 / 0.15)',
+          glow: '0 20px 60px -20px rgb(232 114 28 / 0.35)',
+        },
+      },
+    },
+  };
+</script>
+<style>
+  html { scroll-behavior: smooth; }
+  body { -webkit-font-smoothing: antialiased; }
+  [x-cloak] { display: none; }
+</style>
 </head>
-<body>
-  <iframe
-    src="https://lovable.dev/preview/68uFKJO3BTy6dyDHk4dAtsonsPKXRczM"
-    title="Ya Voy Express"
-    allow="clipboard-write; fullscreen"
-  ></iframe>
+<body class="bg-background text-foreground font-sans">
+
+<div class="min-h-screen">
+
+  <!-- NAV -->
+  <nav class="sticky top-0 z-50 border-b border-border bg-white/90 backdrop-blur">
+    <div class="mx-auto flex max-w-7xl items-center justify-between px-6 py-3">
+      <a href="#top" class="flex items-center">
+        <img src="assets/logo-light.png" alt="Ya Voy Express" class="h-11 w-auto" />
+      </a>
+      <div class="hidden items-center gap-8 md:flex">
+        <a href="#services" class="text-sm font-medium text-gray-500 transition hover:text-brand-orange" data-i18n="nav_services">Servicios</a>
+        <a href="#about" class="text-sm font-medium text-gray-500 transition hover:text-brand-orange" data-i18n="nav_about">Nosotros</a>
+        <a href="#fleet" class="text-sm font-medium text-gray-500 transition hover:text-brand-orange" data-i18n="nav_fleet">Flota</a>
+        <a href="#coverage" class="text-sm font-medium text-gray-500 transition hover:text-brand-orange" data-i18n="nav_coverage">Cobertura</a>
+        <a href="#process" class="text-sm font-medium text-gray-500 transition hover:text-brand-orange" data-i18n="nav_process">Proceso</a>
+        <a href="#contact" class="text-sm font-medium text-gray-500 transition hover:text-brand-orange" data-i18n="nav_contact">Contacto</a>
+      </div>
+      <div class="flex items-center gap-3">
+        <div class="inline-flex items-center gap-1 rounded-full border border-border bg-white p-1 text-xs font-semibold">
+          <button onclick="setLang('es')" id="btn-es" class="rounded-full px-3 py-1 transition bg-brand-navy text-white">ES</button>
+          <button onclick="setLang('en')" id="btn-en" class="rounded-full px-3 py-1 transition text-gray-500 hover:text-foreground">EN</button>
+        </div>
+        <a href="#contact" class="hidden rounded-full bg-brand-orange px-5 py-2.5 text-xs font-bold uppercase tracking-widest text-white transition hover:brightness-110 sm:inline-flex" data-i18n="cta_quote">Cotizar</a>
+        <button class="md:hidden" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')" aria-label="Menu">
+          <div class="space-y-1.5">
+            <span class="block h-0.5 w-6 bg-brand-navy"></span>
+            <span class="block h-0.5 w-6 bg-brand-navy"></span>
+            <span class="block h-0.5 w-6 bg-brand-navy"></span>
+          </div>
+        </button>
+      </div>
+    </div>
+    <div id="mobile-menu" class="hidden border-t border-border bg-white md:hidden">
+      <div class="flex flex-col gap-1 px-6 py-4">
+        <a href="#services" class="py-2 text-sm font-medium text-foreground" data-i18n="nav_services">Servicios</a>
+        <a href="#about" class="py-2 text-sm font-medium text-foreground" data-i18n="nav_about">Nosotros</a>
+        <a href="#fleet" class="py-2 text-sm font-medium text-foreground" data-i18n="nav_fleet">Flota</a>
+        <a href="#coverage" class="py-2 text-sm font-medium text-foreground" data-i18n="nav_coverage">Cobertura</a>
+        <a href="#process" class="py-2 text-sm font-medium text-foreground" data-i18n="nav_process">Proceso</a>
+        <a href="#contact" class="py-2 text-sm font-medium text-foreground" data-i18n="nav_contact">Contacto</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header id="top" class="relative overflow-hidden">
+    <div class="pointer-events-none absolute -top-40 -right-40 h-[500px] w-[500px] rounded-full bg-brand-orange/10 blur-3xl"></div>
+    <div class="mx-auto grid max-w-7xl gap-12 px-6 py-16 md:py-24 lg:grid-cols-2 lg:items-center lg:py-32">
+      <div>
+        <span class="mb-5 inline-block rounded-full bg-brand-orange/10 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-brand-orange" data-i18n="hero_kicker">Logística integral en Perú</span>
+        <h1 class="text-5xl font-extrabold leading-[1.05] tracking-tight text-brand-navy md:text-6xl lg:text-7xl">
+          <span data-i18n="hero_title_1">Entregas que</span><br />
+          <span class="italic text-brand-orange" data-i18n="hero_title_2">no se detienen.</span>
+        </h1>
+        <p class="mt-6 max-w-lg text-lg leading-relaxed text-gray-500" data-i18n="hero_sub">Courier, fulfillment y pick & pack diseñados para el ritmo de tu negocio. Conectamos Lima con cada rincón del Perú.</p>
+        <div class="mt-10 flex flex-wrap gap-4">
+          <a href="#contact" class="rounded-full bg-brand-orange px-8 py-4 text-sm font-bold uppercase tracking-widest text-white shadow-glow transition hover:scale-105" data-i18n="hero_cta_primary">Solicitar cotización</a>
+          <a href="#services" class="rounded-full border-2 border-brand-navy px-8 py-4 text-sm font-bold uppercase tracking-widest text-brand-navy transition hover:bg-brand-navy hover:text-white" data-i18n="hero_cta_secondary">Ver servicios</a>
+        </div>
+        <div class="mt-12 grid grid-cols-3 gap-6 border-t border-border pt-8">
+          <div>
+            <div class="text-3xl font-extrabold text-brand-navy md:text-4xl" data-i18n="stat_1_v">24</div>
+            <div class="mt-1 text-xs font-medium uppercase tracking-wider text-gray-500" data-i18n="stat_1_l">departamentos del Perú</div>
+          </div>
+          <div>
+            <div class="text-3xl font-extrabold text-brand-navy md:text-4xl" data-i18n="stat_2_v">+10K</div>
+            <div class="mt-1 text-xs font-medium uppercase tracking-wider text-gray-500" data-i18n="stat_2_l">envíos mensuales</div>
+          </div>
+          <div>
+            <div class="text-3xl font-extrabold text-brand-navy md:text-4xl" data-i18n="stat_3_v">24/7</div>
+            <div class="mt-1 text-xs font-medium uppercase tracking-wider text-gray-500" data-i18n="stat_3_l">operación continua</div>
+          </div>
+        </div>
+      </div>
+      <div class="relative">
+        <div class="overflow-hidden rounded-3xl bg-brand-navy shadow-card">
+          <img src="assets/van-yavoy.jpg" alt="Furgón Ya Voy Express" class="h-auto w-full object-cover" />
+        </div>
+        <div class="absolute -bottom-6 -left-6 hidden rounded-2xl border border-border bg-white p-5 shadow-card sm:block">
+          <div class="flex items-center gap-4">
+            <img src="assets/logo-icon-dark.png" alt="" class="h-12 w-12 rounded-lg" />
+            <div>
+              <div class="text-xs font-bold uppercase tracking-widest text-gray-500">Lima · Perú</div>
+              <div class="text-sm font-bold text-brand-navy">Ya voy express</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ABOUT -->
+  <section id="about" class="py-24">
+    <div class="mx-auto max-w-7xl px-6">
+      <div class="mb-16 max-w-2xl">
+        <span class="mb-3 inline-block text-xs font-bold uppercase tracking-widest text-brand-orange" data-i18n="about_kicker">Quiénes somos</span>
+        <h2 class="text-4xl font-extrabold tracking-tight text-brand-navy md:text-5xl" data-i18n="about_title">Impulsamos tu negocio con logística confiable.</h2>
+      </div>
+      <div class="grid gap-6 md:grid-cols-3">
+        <div class="rounded-3xl p-8 shadow-card border border-border bg-white transition hover:-translate-y-1">
+          <div class="text-5xl font-extrabold text-brand-orange/30">01</div>
+          <h3 class="mt-4 text-2xl font-bold text-brand-navy" data-i18n="about_mision_t">Misión</h3>
+          <p class="mt-3 text-sm leading-relaxed text-gray-500" data-i18n="about_mision_d">Brindar soluciones logísticas ágiles, seguras y personalizadas que conecten a las empresas peruanas con sus clientes en todo el país, cumpliendo cada entrega con puntualidad y compromiso.</p>
+        </div>
+        <div class="rounded-3xl p-8 shadow-card bg-brand-navy text-white transition hover:-translate-y-1">
+          <div class="text-5xl font-extrabold text-brand-orange">02</div>
+          <h3 class="mt-4 text-2xl font-bold text-white" data-i18n="about_vision_t">Visión</h3>
+          <p class="mt-3 text-sm leading-relaxed text-white/75" data-i18n="about_vision_d">Ser el courier de referencia en el Perú, reconocido por su innovación, cobertura nacional y por elevar los estándares del servicio de entrega y fulfillment.</p>
+        </div>
+        <div class="rounded-3xl p-8 shadow-card border border-border bg-white transition hover:-translate-y-1">
+          <div class="text-5xl font-extrabold text-brand-orange/30">03</div>
+          <h3 class="mt-4 text-2xl font-bold text-brand-navy" data-i18n="about_objetivo_t">Nuestro Objetivo</h3>
+          <p class="mt-3 text-sm leading-relaxed text-gray-500" data-i18n="about_objetivo_d">Optimizar la cadena logística de cada cliente con procesos claros, tecnología y un equipo humano dedicado, garantizando que cada envío llegue a tiempo a cualquier departamento del Perú.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services" class="bg-brand-soft py-24">
+    <div class="mx-auto max-w-7xl px-6">
+      <div class="mb-16 max-w-2xl">
+        <span class="mb-3 inline-block text-xs font-bold uppercase tracking-widest text-brand-orange" data-i18n="services_kicker">Nuestros servicios</span>
+        <h2 class="text-4xl font-extrabold tracking-tight text-brand-navy md:text-5xl" data-i18n="services_title">Mucho más que un courier.</h2>
+        <p class="mt-4 text-lg text-gray-500" data-i18n="services_sub">Gestionamos toda tu cadena logística para que te enfoques en vender.</p>
+      </div>
+      <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <div class="group rounded-3xl p-8 transition hover:-translate-y-1 bg-white shadow-card">
+          <div class="mb-6 inline-flex h-12 w-12 items-center justify-center rounded-2xl text-lg font-extrabold bg-brand-orange/10 text-brand-orange">01</div>
+          <h3 class="mb-3 text-2xl font-bold text-brand-navy" data-i18n="s1_t">Courier Express</h3>
+          <p class="text-sm leading-relaxed text-gray-500" data-i18n="s1_d">Envíos de documentos y paquetes con recojo puerta a puerta y despacho el mismo día en Lima.</p>
+        </div>
+        <div class="group rounded-3xl p-8 transition hover:-translate-y-1 bg-white shadow-card">
+          <div class="mb-6 inline-flex h-12 w-12 items-center justify-center rounded-2xl text-lg font-extrabold bg-brand-orange/10 text-brand-orange">02</div>
+          <h3 class="mb-3 text-2xl font-bold text-brand-navy" data-i18n="s2_t">Última Milla</h3>
+          <p class="text-sm leading-relaxed text-gray-500" data-i18n="s2_d">Entregas de e-commerce y retail con prueba digital, seguimiento GPS y confirmación al destinatario.</p>
+        </div>
+        <div class="group rounded-3xl p-8 transition hover:-translate-y-1 bg-brand-navy text-white shadow-card">
+          <div class="mb-6 inline-flex h-12 w-12 items-center justify-center rounded-2xl text-lg font-extrabold bg-brand-orange text-white">03</div>
+          <h3 class="mb-3 text-2xl font-bold text-white" data-i18n="s3_t">Fulfillment</h3>
+          <p class="text-sm leading-relaxed text-white/70" data-i18n="s3_d">Recibimos, almacenamos y despachamos tu inventario desde nuestro centro de operaciones.</p>
+        </div>
+        <div class="group rounded-3xl p-8 transition hover:-translate-y-1 bg-white shadow-card">
+          <div class="mb-6 inline-flex h-12 w-12 items-center justify-center rounded-2xl text-lg font-extrabold bg-brand-orange/10 text-brand-orange">04</div>
+          <h3 class="mb-3 text-2xl font-bold text-brand-navy" data-i18n="s4_t">Pick & Pack</h3>
+          <p class="text-sm leading-relaxed text-gray-500" data-i18n="s4_d">Preparación precisa de pedidos, empaque personalizado y etiquetado profesional para tu marca.</p>
+        </div>
+        <div class="group rounded-3xl p-8 transition hover:-translate-y-1 bg-white shadow-card">
+          <div class="mb-6 inline-flex h-12 w-12 items-center justify-center rounded-2xl text-lg font-extrabold bg-brand-orange/10 text-brand-orange">05</div>
+          <h3 class="mb-3 text-2xl font-bold text-brand-navy" data-i18n="s5_t">Almacenamiento</h3>
+          <p class="text-sm leading-relaxed text-gray-500" data-i18n="s5_d">Espacios seguros y monitoreados, con control de inventario e integración con tu ERP o tienda online.</p>
+        </div>
+        <div class="group rounded-3xl p-8 transition hover:-translate-y-1 bg-white shadow-card">
+          <div class="mb-6 inline-flex h-12 w-12 items-center justify-center rounded-2xl text-lg font-extrabold bg-brand-orange/10 text-brand-orange">06</div>
+          <h3 class="mb-3 text-2xl font-bold text-brand-navy" data-i18n="s6_t">Logística Corporativa</h3>
+          <p class="text-sm leading-relaxed text-gray-500" data-i18n="s6_d">Programas a medida para empresas con facturación centralizada y reportería mensual.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FLEET -->
+  <section id="fleet" class="py-24">
+    <div class="mx-auto max-w-7xl px-6">
+      <div class="mb-16 max-w-2xl">
+        <span class="mb-3 inline-block text-xs font-bold uppercase tracking-widest text-brand-orange" data-i18n="fleet_kicker">Nuestra flota</span>
+        <h2 class="text-4xl font-extrabold tracking-tight text-brand-navy md:text-5xl" data-i18n="fleet_title">El vehículo correcto para cada entrega.</h2>
+        <p class="mt-4 text-lg text-gray-500" data-i18n="fleet_sub">Motos para envíos express en Lima y furgones para carga voluminosa a nivel nacional.</p>
+      </div>
+      <div class="grid gap-8 md:grid-cols-2">
+        <div class="overflow-hidden rounded-3xl bg-brand-soft shadow-card">
+          <img src="assets/moto-yavoy.jpg" alt="Moto Ya Voy Express" class="h-72 w-full object-cover" loading="lazy" />
+          <div class="p-8">
+            <h3 class="text-2xl font-bold text-brand-navy" data-i18n="fleet_moto_t">Motos Express</h3>
+            <p class="mt-3 text-gray-500" data-i18n="fleet_moto_d">Entregas rápidas dentro de Lima Metropolitana con cajas selladas y personal identificado.</p>
+          </div>
+        </div>
+        <div class="overflow-hidden rounded-3xl bg-brand-soft shadow-card">
+          <img src="assets/van-loading.jpg" alt="Carga de furgón Ya Voy Express" class="h-72 w-full object-cover" loading="lazy" />
+          <div class="p-8">
+            <h3 class="text-2xl font-bold text-brand-navy" data-i18n="fleet_van_t">Furgones Nacionales</h3>
+            <p class="mt-3 text-gray-500" data-i18n="fleet_van_d">Capacidad para carga paletizada, mudanzas comerciales y distribución a provincias.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COVERAGE -->
+  <section id="coverage" class="bg-brand-soft py-24">
+    <div class="mx-auto max-w-7xl px-6">
+      <div class="overflow-hidden rounded-[2.5rem] bg-brand-navy text-white shadow-card">
+        <div class="grid gap-0 lg:grid-cols-2">
+          <div class="relative min-h-[380px]">
+            <img src="assets/lima-coverage.jpg" alt="Cobertura Lima" class="absolute inset-0 h-full w-full object-cover opacity-70" loading="lazy" />
+            <div class="absolute inset-0 bg-gradient-to-r from-brand-navy/80 via-brand-navy/20 to-transparent"></div>
+          </div>
+          <div class="p-10 md:p-14">
+            <span class="mb-3 inline-block text-xs font-bold uppercase tracking-widest text-brand-orange" data-i18n="coverage_kicker">Cobertura</span>
+            <h2 class="text-4xl font-extrabold tracking-tight md:text-5xl" data-i18n="coverage_title">Entregamos a los 24 departamentos del Perú.</h2>
+            <div class="mt-8 space-y-6">
+              <div class="flex gap-4">
+                <div class="mt-1 h-3 w-3 shrink-0 rounded-full bg-brand-orange"></div>
+                <div>
+                  <h4 class="text-lg font-bold" data-i18n="coverage_1_t">Lima Metropolitana</h4>
+                  <p class="mt-1 text-sm text-white/70" data-i18n="coverage_1_d">Servicio express en todos los distritos con flota propia.</p>
+                </div>
+              </div>
+              <div class="flex gap-4">
+                <div class="mt-1 h-3 w-3 shrink-0 rounded-full bg-brand-orange"></div>
+                <div>
+                  <h4 class="text-lg font-bold" data-i18n="coverage_2_t">24 Departamentos</h4>
+                  <p class="mt-1 text-sm text-white/70" data-i18n="coverage_2_d">Cobertura nacional a los 24 departamentos con red terrestre y aérea.</p>
+                </div>
+              </div>
+              <div class="flex gap-4">
+                <div class="mt-1 h-3 w-3 shrink-0 rounded-full bg-brand-orange"></div>
+                <div>
+                  <h4 class="text-lg font-bold" data-i18n="coverage_3_t">Zonas de difícil acceso</h4>
+                  <p class="mt-1 text-sm text-white/70" data-i18n="coverage_3_d">Experiencia en operaciones para retail, minería y proyectos.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section id="process" class="py-24">
+    <div class="mx-auto max-w-7xl px-6">
+      <div class="grid gap-16 lg:grid-cols-2 lg:items-start">
+        <div>
+          <span class="mb-3 inline-block text-xs font-bold uppercase tracking-widest text-brand-orange" data-i18n="process_kicker">Cómo trabajamos</span>
+          <h2 class="text-4xl font-extrabold tracking-tight text-brand-navy md:text-5xl" data-i18n="process_title">Un proceso simple y transparente.</h2>
+          <div class="mt-8 rounded-3xl bg-brand-soft p-8">
+            <img src="assets/courier-illustration.png" alt="Courier Ya Voy Express" class="mx-auto h-auto w-full max-w-md object-contain" loading="lazy" />
+          </div>
+        </div>
+        <div class="space-y-6">
+          <div class="flex gap-6 rounded-2xl border border-border bg-white p-6 transition hover:border-brand-orange">
+            <div class="text-4xl font-extrabold text-brand-orange">01</div>
+            <div>
+              <h4 class="text-xl font-bold text-brand-navy" data-i18n="p1_t">Coordinamos</h4>
+              <p class="mt-2 text-gray-500" data-i18n="p1_d">Levantamos tus requerimientos y diseñamos la operación a tu medida.</p>
+            </div>
+          </div>
+          <div class="flex gap-6 rounded-2xl border border-border bg-white p-6 transition hover:border-brand-orange">
+            <div class="text-4xl font-extrabold text-brand-orange">02</div>
+            <div>
+              <h4 class="text-xl font-bold text-brand-navy" data-i18n="p2_t">Recogemos</h4>
+              <p class="mt-2 text-gray-500" data-i18n="p2_d">Retiramos la carga en tu local o la recibimos en nuestro almacén.</p>
+            </div>
+          </div>
+          <div class="flex gap-6 rounded-2xl border border-border bg-white p-6 transition hover:border-brand-orange">
+            <div class="text-4xl font-extrabold text-brand-orange">03</div>
+            <div>
+              <h4 class="text-xl font-bold text-brand-navy" data-i18n="p3_t">Procesamos</h4>
+              <p class="mt-2 text-gray-500" data-i18n="p3_d">Clasificación, pick & pack, etiquetado y control de calidad.</p>
+            </div>
+          </div>
+          <div class="flex gap-6 rounded-2xl border border-border bg-white p-6 transition hover:border-brand-orange">
+            <div class="text-4xl font-extrabold text-brand-orange">04</div>
+            <div>
+              <h4 class="text-xl font-bold text-brand-navy" data-i18n="p4_t">Entregamos</h4>
+              <p class="mt-2 text-gray-500" data-i18n="p4_d">Despacho a Lima o provincias con confirmación digital.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="bg-brand-navy py-24 text-white">
+    <div class="mx-auto grid max-w-7xl gap-12 px-6 lg:grid-cols-2">
+      <div>
+        <span class="mb-3 inline-block text-xs font-bold uppercase tracking-widest text-brand-orange" data-i18n="contact_kicker">Hablemos</span>
+        <h2 class="text-4xl font-extrabold tracking-tight md:text-5xl" data-i18n="contact_title">Cotiza tu operación logística.</h2>
+        <p class="mt-4 max-w-md text-lg text-white/70" data-i18n="contact_sub">Cuéntanos sobre tu volumen y tipo de envíos. Te responderemos en menos de 24 horas.</p>
+        <div class="mt-10 space-y-4 text-sm">
+          <div class="flex items-center gap-3">
+            <span class="inline-block h-2 w-2 rounded-full bg-brand-orange"></span>
+            <span>ventas@yavoyexpress.pe</span>
+          </div>
+          <div class="flex items-center gap-3">
+            <span class="inline-block h-2 w-2 rounded-full bg-brand-orange"></span>
+            <span>+51 987 654 321 · WhatsApp</span>
+          </div>
+          <div class="flex items-center gap-3">
+            <span class="inline-block h-2 w-2 rounded-full bg-brand-orange"></span>
+            <span data-i18n="footer_address">Lima, Perú</span>
+          </div>
+        </div>
+      </div>
+      <form id="contact-form" class="rounded-3xl bg-white p-8 text-brand-navy shadow-card">
+        <div id="form-fields" class="grid gap-4">
+          <div class="grid gap-4 sm:grid-cols-2">
+            <input data-i18n-placeholder="form_name" placeholder="Nombre completo" required class="rounded-xl border border-border bg-white px-4 py-3 text-sm focus:border-brand-orange focus:outline-none" />
+            <input data-i18n-placeholder="form_company" placeholder="Empresa" class="rounded-xl border border-border bg-white px-4 py-3 text-sm focus:border-brand-orange focus:outline-none" />
+          </div>
+          <div class="grid gap-4 sm:grid-cols-2">
+            <input type="email" data-i18n-placeholder="form_email" placeholder="Correo electrónico" required class="rounded-xl border border-border bg-white px-4 py-3 text-sm focus:border-brand-orange focus:outline-none" />
+            <input data-i18n-placeholder="form_phone" placeholder="Teléfono / WhatsApp" class="rounded-xl border border-border bg-white px-4 py-3 text-sm focus:border-brand-orange focus:outline-none" />
+          </div>
+          <select required class="rounded-xl border border-border bg-white px-4 py-3 text-sm text-brand-navy focus:border-brand-orange focus:outline-none">
+            <option value="" disabled selected data-i18n="form_service">Servicio de interés</option>
+            <option data-i18n="s1_t">Courier Express</option>
+            <option data-i18n="s2_t">Última Milla</option>
+            <option>Fulfillment</option>
+            <option>Pick & Pack</option>
+            <option data-i18n="s5_t">Almacenamiento</option>
+            <option data-i18n="s6_t">Logística Corporativa</option>
+          </select>
+          <textarea rows="4" data-i18n-placeholder="form_message" placeholder="Cuéntanos tu operación" class="rounded-xl border border-border bg-white px-4 py-3 text-sm focus:border-brand-orange focus:outline-none"></textarea>
+          <button type="submit" class="mt-2 rounded-full bg-brand-orange py-4 text-sm font-bold uppercase tracking-widest text-white transition hover:brightness-110" data-i18n="form_submit">Enviar solicitud</button>
+        </div>
+        <div id="form-ok" class="hidden flex h-full min-h-[400px] flex-col items-center justify-center text-center">
+          <div class="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-full bg-brand-orange/10 text-3xl">✓</div>
+          <p class="text-lg font-semibold" data-i18n="form_ok">¡Gracias! Nos pondremos en contacto contigo pronto.</p>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bg-brand-navy pb-10 pt-16 text-white">
+    <div class="mx-auto max-w-7xl px-6">
+      <div class="grid gap-10 border-b border-white/10 pb-10 md:grid-cols-3">
+        <div>
+          <img src="assets/logo-dark.png" alt="Ya Voy Express" class="h-14 w-auto" />
+          <p class="mt-4 max-w-xs text-sm text-white/60" data-i18n="footer_tagline">Tu operación logística, en movimiento.</p>
+        </div>
+        <div>
+          <h5 class="mb-4 text-xs font-bold uppercase tracking-widest text-brand-orange" data-i18n="nav_services">Servicios</h5>
+          <ul class="space-y-2 text-sm text-white/70">
+            <li data-i18n="s1_t">Courier Express</li>
+            <li data-i18n="s2_t">Última Milla</li>
+            <li data-i18n="s3_t">Fulfillment</li>
+            <li data-i18n="s4_t">Pick & Pack</li>
+            <li data-i18n="s5_t">Almacenamiento</li>
+          </ul>
+        </div>
+        <div>
+          <h5 class="mb-4 text-xs font-bold uppercase tracking-widest text-brand-orange" data-i18n="footer_contact">Contacto</h5>
+          <ul class="space-y-2 text-sm text-white/70">
+            <li>ventas@yavoyexpress.pe</li>
+            <li>+51 987 654 321</li>
+            <li data-i18n="footer_address">Lima, Perú</li>
+          </ul>
+        </div>
+      </div>
+      <div class="mt-8 flex flex-col items-center justify-between gap-4 text-xs text-white/50 md:flex-row">
+        <span><span id="footer-year"></span> Ya Voy Express S.A.C. <span data-i18n="footer_rights">Todos los derechos reservados.</span></span>
+        <span>Hecho en Perú 🇵🇪</span>
+      </div>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+document.getElementById('footer-year').textContent = '© ' + new Date().getFullYear();
+
+const dict = {
+  nav_services: { es: "Servicios", en: "Services" },
+  nav_about: { es: "Nosotros", en: "About" },
+  nav_fleet: { es: "Flota", en: "Fleet" },
+  nav_coverage: { es: "Cobertura", en: "Coverage" },
+  nav_process: { es: "Proceso", en: "Process" },
+  nav_contact: { es: "Contacto", en: "Contact" },
+  cta_quote: { es: "Cotizar", en: "Get a quote" },
+  about_kicker: { es: "Quiénes somos", en: "Who we are" },
+  about_title: { es: "Impulsamos tu negocio con logística confiable.", en: "We power your business with reliable logistics." },
+  about_mision_t: { es: "Misión", en: "Mission" },
+  about_mision_d: { es: "Brindar soluciones logísticas ágiles, seguras y personalizadas que conecten a las empresas peruanas con sus clientes en todo el país, cumpliendo cada entrega con puntualidad y compromiso.", en: "To deliver agile, secure and personalized logistics solutions that connect Peruvian businesses with their customers across the country, fulfilling every delivery with punctuality and commitment." },
+  about_vision_t: { es: "Visión", en: "Vision" },
+  about_vision_d: { es: "Ser el courier de referencia en el Perú, reconocido por su innovación, cobertura nacional y por elevar los estándares del servicio de entrega y fulfillment.", en: "To be Peru's leading courier, recognized for innovation, nationwide coverage and for raising the standards of delivery and fulfillment services." },
+  about_objetivo_t: { es: "Nuestro Objetivo", en: "Our Goal" },
+  about_objetivo_d: { es: "Optimizar la cadena logística de cada cliente con procesos claros, tecnología y un equipo humano dedicado, garantizando que cada envío llegue a tiempo a cualquier departamento del Perú.", en: "To optimize each client's supply chain with clear processes, technology and a dedicated team, ensuring every shipment arrives on time to any department in Peru." },
+  hero_kicker: { es: "Logística integral en Perú", en: "Full-service logistics in Peru" },
+  hero_title_1: { es: "Entregas que", en: "Deliveries that" },
+  hero_title_2: { es: "no se detienen.", en: "never stop." },
+  hero_sub: { es: "Courier, fulfillment y pick & pack diseñados para el ritmo de tu negocio. Conectamos Lima con cada rincón del Perú.", en: "Courier, fulfillment and pick & pack built for the pace of your business. We connect Lima with every corner of Peru." },
+  hero_cta_primary: { es: "Solicitar cotización", en: "Request a quote" },
+  hero_cta_secondary: { es: "Ver servicios", en: "See services" },
+  stat_1_v: { es: "24", en: "24" },
+  stat_1_l: { es: "departamentos del Perú", en: "departments of Peru" },
+  stat_2_v: { es: "+10K", en: "+10K" },
+  stat_2_l: { es: "envíos mensuales", en: "monthly shipments" },
+  stat_3_v: { es: "24/7", en: "24/7" },
+  stat_3_l: { es: "operación continua", en: "continuous operation" },
+  services_kicker: { es: "Nuestros servicios", en: "Our services" },
+  services_title: { es: "Mucho más que un courier.", en: "Much more than a courier." },
+  services_sub: { es: "Gestionamos toda tu cadena logística para que te enfoques en vender.", en: "We manage your entire supply chain so you can focus on selling." },
+  s1_t: { es: "Courier Express", en: "Express Courier" },
+  s1_d: { es: "Envíos de documentos y paquetes con recojo puerta a puerta y despacho el mismo día en Lima.", en: "Door-to-door document and parcel deliveries with same-day dispatch across Lima." },
+  s2_t: { es: "Última Milla", en: "Last Mile" },
+  s2_d: { es: "Entregas de e-commerce y retail con prueba digital, seguimiento GPS y confirmación al destinatario.", en: "E-commerce and retail deliveries with digital proof, GPS tracking and recipient confirmation." },
+  s3_t: { es: "Fulfillment", en: "Fulfillment" },
+  s3_d: { es: "Recibimos, almacenamos y despachamos tu inventario desde nuestro centro de operaciones.", en: "We receive, store and ship your inventory from our operations hub." },
+  s4_t: { es: "Pick & Pack", en: "Pick & Pack" },
+  s4_d: { es: "Preparación precisa de pedidos, empaque personalizado y etiquetado profesional para tu marca.", en: "Precise order preparation, custom packaging and professional labeling for your brand." },
+  s5_t: { es: "Almacenamiento", en: "Warehousing" },
+  s5_d: { es: "Espacios seguros y monitoreados, con control de inventario e integración con tu ERP o tienda online.", en: "Secure monitored spaces with inventory control and ERP or online store integration." },
+  s6_t: { es: "Logística Corporativa", en: "Corporate Logistics" },
+  s6_d: { es: "Programas a medida para empresas con facturación centralizada y reportería mensual.", en: "Tailored programs for companies with centralized billing and monthly reporting." },
+  fleet_kicker: { es: "Nuestra flota", en: "Our fleet" },
+  fleet_title: { es: "El vehículo correcto para cada entrega.", en: "The right vehicle for every delivery." },
+  fleet_sub: { es: "Motos para envíos express en Lima y furgones para carga voluminosa a nivel nacional.", en: "Motorbikes for express deliveries in Lima and vans for bulk cargo nationwide." },
+  fleet_moto_t: { es: "Motos Express", en: "Express Motorbikes" },
+  fleet_moto_d: { es: "Entregas rápidas dentro de Lima Metropolitana con cajas selladas y personal identificado.", en: "Fast deliveries across Metropolitan Lima with sealed boxes and identified staff." },
+  fleet_van_t: { es: "Furgones Nacionales", en: "National Vans" },
+  fleet_van_d: { es: "Capacidad para carga paletizada, mudanzas comerciales y distribución a provincias.", en: "Capacity for palletized cargo, commercial moves and distribution to provinces." },
+  coverage_kicker: { es: "Cobertura", en: "Coverage" },
+  coverage_title: { es: "Entregamos a los 24 departamentos del Perú.", en: "We deliver to all 24 departments of Peru." },
+  coverage_1_t: { es: "Lima Metropolitana", en: "Metropolitan Lima" },
+  coverage_1_d: { es: "Servicio express en todos los distritos con flota propia.", en: "Express service in every district with our own fleet." },
+  coverage_2_t: { es: "24 Departamentos", en: "24 Departments" },
+  coverage_2_d: { es: "Cobertura nacional a los 24 departamentos con red terrestre y aérea.", en: "Nationwide coverage to all 24 departments via ground and air network." },
+  coverage_3_t: { es: "Zonas de difícil acceso", en: "Hard-to-reach zones" },
+  coverage_3_d: { es: "Experiencia en operaciones para retail, minería y proyectos.", en: "Experience serving retail, mining and project operations." },
+  process_kicker: { es: "Cómo trabajamos", en: "How we work" },
+  process_title: { es: "Un proceso simple y transparente.", en: "A simple, transparent process." },
+  p1_t: { es: "Coordinamos", en: "We coordinate" },
+  p1_d: { es: "Levantamos tus requerimientos y diseñamos la operación a tu medida.", en: "We assess your requirements and design a tailored operation." },
+  p2_t: { es: "Recogemos", en: "We pick up" },
+  p2_d: { es: "Retiramos la carga en tu local o la recibimos en nuestro almacén.", en: "We collect at your site or receive it at our warehouse." },
+  p3_t: { es: "Procesamos", en: "We process" },
+  p3_d: { es: "Clasificación, pick & pack, etiquetado y control de calidad.", en: "Sorting, pick & pack, labeling and quality control." },
+  p4_t: { es: "Entregamos", en: "We deliver" },
+  p4_d: { es: "Despacho a Lima o provincias con confirmación digital.", en: "Dispatch to Lima or provinces with digital confirmation." },
+  contact_kicker: { es: "Hablemos", en: "Let's talk" },
+  contact_title: { es: "Cotiza tu operación logística.", en: "Quote your logistics operation." },
+  contact_sub: { es: "Cuéntanos sobre tu volumen y tipo de envíos. Te responderemos en menos de 24 horas.", en: "Tell us about your volume and shipment type. We reply within 24 hours." },
+  form_name: { es: "Nombre completo", en: "Full name" },
+  form_company: { es: "Empresa", en: "Company" },
+  form_email: { es: "Correo electrónico", en: "Email" },
+  form_phone: { es: "Teléfono / WhatsApp", en: "Phone / WhatsApp" },
+  form_service: { es: "Servicio de interés", en: "Service of interest" },
+  form_message: { es: "Cuéntanos tu operación", en: "Tell us about your operation" },
+  form_submit: { es: "Enviar solicitud", en: "Send request" },
+  form_ok: { es: "¡Gracias! Nos pondremos en contacto contigo pronto.", en: "Thanks! We'll get in touch with you shortly." },
+  footer_tagline: { es: "Tu operación logística, en movimiento.", en: "Your logistics operation, in motion." },
+  footer_contact: { es: "Contacto", en: "Contact" },
+  footer_address: { es: "Lima, Perú", en: "Lima, Peru" },
+  footer_rights: { es: "Todos los derechos reservados.", en: "All rights reserved." },
+};
+
+let currentLang = 'es';
+
+function setLang(lang) {
+  currentLang = lang;
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (dict[key]) el.textContent = dict[key][lang];
+  });
+  document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+    const key = el.getAttribute('data-i18n-placeholder');
+    if (dict[key]) el.setAttribute('placeholder', dict[key][lang]);
+  });
+  document.getElementById('btn-es').className = 'rounded-full px-3 py-1 transition ' + (lang === 'es' ? 'bg-brand-navy text-white' : 'text-gray-500 hover:text-foreground');
+  document.getElementById('btn-en').className = 'rounded-full px-3 py-1 transition ' + (lang === 'en' ? 'bg-brand-navy text-white' : 'text-gray-500 hover:text-foreground');
+}
+
+document.getElementById('contact-form').addEventListener('submit', function(e) {
+  e.preventDefault();
+  document.getElementById('form-fields').classList.add('hidden');
+  const ok = document.getElementById('form-ok');
+  ok.classList.remove('hidden');
+  ok.classList.add('flex');
+});
+</script>
+
 </body>
 </html>
